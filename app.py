@@ -145,12 +145,6 @@ input_data = pd.DataFrame({
 
 if st.button('Prediksi'):
 
-    # =========================
-# PREDIKSI
-# =========================
-
-if st.button('Prediksi'):
-
     prediction = model.predict(input_data)
 
     prediction_proba = model.predict_proba(input_data)
