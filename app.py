@@ -18,7 +18,7 @@ st.write('Masukkan data berikut untuk melakukan prediksi risiko depresi.')
 
 age = st.number_input('Usia', min_value=10, max_value=25, value=18)
 
-social_media_hours = st.number_input(
+daily_social_media_hours = st.number_input(
     'Durasi Penggunaan Media Sosial (jam/hari)',
     min_value=0.0,
     max_value=24.0,
@@ -46,12 +46,6 @@ anxiety_level = st.slider(
     value=5
 )
 
-academic_performance = st.slider(
-    'Performa Akademik',
-    min_value=1,
-    max_value=10,
-    value=5
-)
 
 # =========================
 # DATAFRAME INPUT
@@ -59,11 +53,10 @@ academic_performance = st.slider(
 
 input_data = pd.DataFrame({
     'Age': [age],
-    'Social_Media_Hours': [social_media_hours],
+    'Daily_Social_Media_Hours': [social_media_hours],
     'Sleep_Hours': [sleep_hours],
     'Stress_Level': [stress_level],
     'Anxiety_Level': [anxiety_level],
-    'Academic_Performance': [academic_performance]
 })
 
 # =========================
