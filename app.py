@@ -53,7 +53,7 @@ anxiety_level = st.slider(
 
 input_data = pd.DataFrame({
     'Age': [age],
-    'Daily_Social_Media_Hours': [social_media_hours],
+    'Daily_Social_Media_Hours': [daily_social_media_hours],
     'Sleep_Hours': [sleep_hours],
     'Stress_Level': [stress_level],
     'Anxiety_Level': [anxiety_level],
