@@ -8,7 +8,7 @@ import joblib
 # LOAD MODEL
 # =========================
 
-model = joblib.load('rf_prediksidepresi.pkl')
+model = joblib.load('prediksidepresi_rf.pkl')
 
 # =========================
 # TITLE
