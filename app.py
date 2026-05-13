@@ -145,6 +145,12 @@ input_data = pd.DataFrame({
 
 if st.button('Prediksi'):
 
+    # =========================
+# PREDIKSI
+# =========================
+
+if st.button('Prediksi'):
+
     prediction = model.predict(input_data)
 
     prediction_proba = model.predict_proba(input_data)
@@ -153,9 +159,104 @@ if st.button('Prediksi'):
 
     st.subheader('Hasil Prediksi')
 
+    # =========================
+    # STATUS PREDIKSI
+    # =========================
+
     if prediction[0] == 1:
         st.error('Terindikasi Berisiko Depresi')
     else:
         st.success('Tidak Terindikasi Depresi')
 
-    st.write(f'Probabilitas Risiko Depresi: {probability:.2%}')
+    # =========================
+    # PROBABILITAS
+    # =========================
+
+    st.write(f'Probabilitas Depresi: {probability:.2%}')
+    st.write(f'Probabilitas Tidak Depresi: {(1-probability):.2%}')
+
+    # =========================
+    # PROGRESS BAR
+    # =========================
+
+    st.progress(float(probability))
+
+    # =========================
+    # WARNA RISIKO
+    # =========================
+
+    if probability < 0.3:
+        st.success('Risiko Rendah')
+
+    elif probability < 0.7:
+        st.warning('Risiko Sedang')
+
+    else:
+        st.error('Risiko Tinggi')
+
+    # =========================
+    # INSIGHT OTOMATIS
+    # =========================
+
+    st.subheader('Insight')
+
+    insights = []
+
+    if social_media_hours >= 8:
+        insights.append(
+            '- Penggunaan media sosial tergolong tinggi.'
+        )
+
+    if sleep_hours <= 5:
+        insights.append(
+            '- Durasi tidur rendah dan dapat mempengaruhi kesehatan mental.'
+        )
+
+    if stress_level >= 7:
+        insights.append(
+            '- Tingkat stress cukup tinggi.'
+        )
+
+    if anxiety_level >= 7:
+        insights.append(
+            '- Tingkat anxiety cukup tinggi.'
+        )
+
+    if addiction_level >= 7:
+        insights.append(
+            '- Tingkat kecanduan media sosial tinggi.'
+        )
+
+    if physical_activity <= 2:
+        insights.append(
+            '- Aktivitas fisik tergolong rendah.'
+        )
+
+    if len(insights) == 0:
+        st.success(
+            'Tidak ditemukan faktor risiko yang dominan.'
+        )
+
+    else:
+        for insight in insights:
+            st.write(insight)
+
+    # =========================
+    # FEATURE IMPORTANCE
+    # =========================
+
+    st.subheader('Feature Importance')
+
+    feature_importance = pd.DataFrame({
+        'Feature': input_data.columns,
+        'Importance': model.feature_importances_
+    })
+
+    feature_importance = feature_importance.sort_values(
+        by='Importance',
+        ascending=False
+    )
+
+    st.bar_chart(
+        feature_importance.set_index('Feature')
+    )
