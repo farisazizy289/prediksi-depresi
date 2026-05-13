@@ -196,7 +196,7 @@ if st.button('Prediksi'):
 
     insights = []
 
-    if social_media_hours >= 8:
+    if daily_social_media_hours >= 8:
         insights.append(
             '- Penggunaan media sosial tergolong tinggi.'
         )
